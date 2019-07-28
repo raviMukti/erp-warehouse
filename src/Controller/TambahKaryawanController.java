@@ -38,8 +38,6 @@ public class TambahKaryawanController implements Initializable {
     @FXML
     private ComboBox<?> comboAreaKerja;
     @FXML
-    private ComboBox<?> comboStatusKerja;
-    @FXML
     private Button btnUploadBerkas;
     @FXML
     private DatePicker masukDatePicker;

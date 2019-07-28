@@ -56,21 +56,26 @@
    <top>
       <Pane prefHeight="47.0" prefWidth="698.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXTextField fx:id="fieldCari" focusColor="#0040ff" labelFloat="true" layoutX="525.0" layoutY="11.0" onAction="#fieldCariAction" promptText="Cari Barang" unFocusColor="WHITE" />
-            <Button layoutX="481.0" layoutY="11.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="30.0" stylesheets="@../Resources/style1.css">
+            <JFXTextField fx:id="fieldCari" focusColor="#0040ff" labelFloat="true" layoutX="503.0" layoutY="11.0" onAction="#fieldCariAction" promptText="Cari Merk" unFocusColor="WHITE" />
+            <Button fx:id="btnCari" layoutX="464.0" layoutY="11.0" mnemonicParsing="false" onAction="#btnCariAction" prefHeight="25.0" prefWidth="30.0" stylesheets="@../Resources/style1.css">
                <graphic>
-                  <ImageView fx:id="btnCari" fitHeight="19.0" fitWidth="19.0" onDragDetected="#btnCariAction" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="19.0" fitWidth="19.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../Resources/icons8-search-64.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
+            <ImageView fx:id="delCari" fitHeight="23.0" fitWidth="25.0" layoutX="638.0" layoutY="13.0" onMouseClicked="#hapusCariDanRefresh" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Resources/icons8-delete-64.png" />
+               </image>
+            </ImageView>
          </children>
       </Pane>
    </top>
    <center>
-      <TableView fx:id="tableMasterBarang" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="tableMasterBarang" onMouseClicked="#btnHapusEditAktif" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="colIdBarang" prefWidth="76.0" text="ID BARANG" />
             <TableColumn fx:id="colNamaBarang" prefWidth="142.0" text="NAMA BARANG" />

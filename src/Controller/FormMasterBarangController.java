@@ -15,7 +15,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -51,7 +50,7 @@ public class FormMasterBarangController implements Initializable {
     @FXML
     private JFXTextField fieldCari;
     @FXML
-    private ImageView btnCari;
+    private Button btnCari;
     @FXML
     private Button btnKembali;
     @FXML
@@ -90,6 +89,7 @@ public class FormMasterBarangController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         btnHapusEditDisable();
+        delCari.setVisible(false);
         initKolom();
         try {
             fetchKolomDatabase();
@@ -116,9 +116,9 @@ public class FormMasterBarangController implements Initializable {
     private void fieldCariAction(ActionEvent event) throws ClassNotFoundException {
         ObservableList<Barang> listBarangCari = FXCollections.observableArrayList();
         listBarangCari.removeAll(listBarangCari);
-        
+        delCari.setVisible(true);
         String itemCari = fieldCari.getText();
-        String qCari = "SELECT * FROM `wh`.`m_barang` WHERE `merk_barang` LIKE  '%"+itemCari+"';";
+        String qCari = "SELECT * FROM `wh`.`m_barang` WHERE `merk_barang` LIKE  '%"+itemCari+"%';";
         try {
             conn = DBHandler.getConnection();
             ps  = conn.prepareStatement(qCari);
@@ -135,10 +135,6 @@ public class FormMasterBarangController implements Initializable {
         tableMasterBarang.setItems(listBarangCari);
     }
 
-    @FXML
-    private void btnCariAction(MouseEvent event) {
-        
-    }
 
 
     @FXML
@@ -252,7 +248,15 @@ public class FormMasterBarangController implements Initializable {
     }
 
     @FXML
-    private void hapusCariDanRefresh(MouseEvent event) {
+    private void hapusCariDanRefresh(MouseEvent event) throws ClassNotFoundException {
+        fieldCari.setText("");
+        delCari.setVisible(false);
+        FormMasterBarangController.getInstance().fetchKolomDatabase();
+    }
+
+    @FXML
+    private void btnCariAction(ActionEvent event) throws ClassNotFoundException {
+        FormMasterBarangController.getInstance().fieldCariAction(event);
     }
 }
 

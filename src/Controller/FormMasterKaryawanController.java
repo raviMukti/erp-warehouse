@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Model.Karyawan;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
@@ -37,7 +38,7 @@ public class FormMasterKaryawanController implements Initializable {
     @FXML
     private JFXTextField fieldCari;
     @FXML
-    private ImageView btnCari;
+    private Button btnCari;
     @FXML
     private Button btnTambahKaryawan;
     @FXML
@@ -47,25 +48,27 @@ public class FormMasterKaryawanController implements Initializable {
     @FXML
     private Button btnKembali;
     @FXML
-    private TableView<?> tableMasterKaryawan;
+    private TableView<Karyawan> tableMasterKaryawan;
     @FXML
-    private TableColumn<?, ?> colNip;
+    private TableColumn<Karyawan, String> colNip;
     @FXML
-    private TableColumn<?, ?> colNamaKaryawan;
+    private TableColumn<Karyawan, String> colNamaKaryawan;
     @FXML
-    private TableColumn<?, ?> colJabatanKaryawan;
+    private TableColumn<Karyawan, String> colJabatanKaryawan;
     @FXML
-    private TableColumn<?, ?> colDivisiKaryawan;
+    private TableColumn<Karyawan, String> colDivisiKaryawan;
     @FXML
-    private TableColumn<?, ?> colAreaKaryawan;
+    private TableColumn<Karyawan, String> colAreaKaryawan;
     @FXML
-    private TableColumn<?, ?> colMulaiKerja;
+    private TableColumn<Karyawan, String> colMulaiKerja;
     @FXML
-    private TableColumn<?, ?> colAkhirKerja;
+    private TableColumn<Karyawan, String> colAkhirKerja;
     @FXML
-    private TableColumn<?, ?> colStatusKaryawan;
+    private TableColumn<Karyawan, String> colStatusKaryawan;
     @FXML
-    private TableColumn<?, ?> colFotoKaryawan;
+    private TableColumn<Karyawan, String> colFotoKaryawan;
+    @FXML
+    private ImageView delCari;
 
     /**
      * Initializes the controller class.
@@ -79,9 +82,6 @@ public class FormMasterKaryawanController implements Initializable {
     private void fieldCariAction(ActionEvent event) {
     }
 
-    @FXML
-    private void btnCariAction(MouseEvent event) {
-    }
 
     @FXML
     private void btnTambahKaryawanAction(ActionEvent event) throws IOException {
@@ -134,6 +134,14 @@ public class FormMasterKaryawanController implements Initializable {
         if(konfirmasiBatal.get() == ButtonType.OK){
             btnKembali.getScene().getWindow().hide();
         }
+    }
+
+    @FXML
+    private void btnCariAction(ActionEvent event) {
+    }
+
+    @FXML
+    private void hapusCariDanRefresh(MouseEvent event) {
     }
     
 }

@@ -8,6 +8,7 @@ package DAO;
 import Database.DBHandler;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -36,17 +37,22 @@ public class BarangDAO {
         try {
             DBHandler.dbExecuteUpdate(qHapusBarang);
         } catch (SQLException e) {
-            System.out.println("Ada kesalahan saat hapus data " + e);
+            JOptionPane.showMessageDialog(null, "Gagal menghapus data " + e);
         }
     }
     
     //Method Update
     public static void updateBarang(String nama_barang, String merk_barang, String tipe_barang,
-            LocalDate tanggal_masuk_barang, String satuan_barang, double stok_awal, String colTriggerUpdate){
+            LocalDate tanggal_masuk_barang, String satuan_barang, double stok_awal, String colTriggerUpdate) throws ClassNotFoundException{
         //Perintah Query
         String qUpdateBarang = "UPDATE `wh`.`m_barang` SET `nama_barang`='"+nama_barang+"',"
                 + "`merk_barang`='"+merk_barang+"', `tipe_barang`='"+tipe_barang+"',"
                 + "`masuk_gudang`='"+tanggal_masuk_barang+"', `satuan_barang`='"+satuan_barang+"',"
                 + "`stok_barang`='"+stok_awal+"' WHERE id_barang='"+colTriggerUpdate+"';";
+        try {
+            DBHandler.dbExecuteUpdate(qUpdateBarang);
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Gagal Update data, lihat di DAO " + e);
+        }
     }
 }
