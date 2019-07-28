@@ -107,6 +107,8 @@ public class TambahBarangController implements Initializable {
             alertSimpan.setContentText("Simpan data ke database berhasil !");
             alertSimpan.showAndWait();
             btnSimpanBarang.getScene().getWindow().hide();
+            FormMasterBarangController.getInstance().fetchKolomDatabase();
+            FormMasterBarangController.getInstance().btnHapusEditDisable();
         }
     }
     

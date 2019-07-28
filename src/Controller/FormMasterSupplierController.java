@@ -5,11 +5,21 @@
  */
 package Controller;
 
+import Database.DBHandler;
+import Model.Barang;
+import Model.Supplier;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -21,11 +31,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -47,15 +59,15 @@ public class FormMasterSupplierController implements Initializable {
     @FXML
     private Button btnEditSupplier;
     @FXML
-    private TableView<?> tableMasterSupplier;
+    private TableView<Supplier> tableMasterSupplier;
     @FXML
-    private TableColumn<?, ?> colIdSupplier;
+    private TableColumn<Supplier, String> colIdSupplier;
     @FXML
-    private TableColumn<?, ?> colNamaSupplier;
+    private TableColumn<Supplier, String> colNamaSupplier;
     @FXML
-    private TableColumn<?, ?> colAlamatSupplieir;
+    private TableColumn<Supplier, String> colAlamatSupplieir;
     @FXML
-    private TableColumn<?, ?> colStatusSupplier;
+    private TableColumn<Supplier, String> colStatusSupplier;
 
     /**
      * Initializes the controller class.
@@ -63,8 +75,24 @@ public class FormMasterSupplierController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        initKolom();
+        try {
+            fetchKolomDatabase();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(FormMasterSupplierController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }    
-
+    
+    private static FormMasterSupplierController instance;
+    public FormMasterSupplierController(){
+        instance = this;
+    }
+    public static FormMasterSupplierController getInstance(){
+        return instance;
+    }
+    
+    public static String idSupplierGlobal;
+    
     @FXML
     private void fieldCariAction(ActionEvent event) {
     }
@@ -96,10 +124,13 @@ public class FormMasterSupplierController implements Initializable {
     }
 
     @FXML
-    private void btnEditSupplierAction(ActionEvent event) throws IOException {
+    private void btnEditSupplierAction(ActionEvent event) throws IOException, ClassNotFoundException {
+        idSupplierGlobal = String.valueOf(tableMasterSupplier.getSelectionModel().getSelectedItem().getId_supplier());
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/View/EditSupplier.fxml"));
         Parent root = (Parent) loader.load();
+        EditSupplierController ctrl = loader.getController();
+        ctrl.initDataEdit(idSupplierGlobal);
         Stage stage = new Stage();
         Scene scene = new Scene(root);
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -124,5 +155,30 @@ public class FormMasterSupplierController implements Initializable {
         if(konfirmasiBatal.get() == ButtonType.OK){
             btnKembali.getScene().getWindow().hide();
         }
-    }  
+    }
+    
+    void initKolom(){
+        colIdSupplier.setCellValueFactory(new PropertyValueFactory<>("id_supplier"));
+        colNamaSupplier.setCellValueFactory(new PropertyValueFactory<>("nama_supplier"));
+        colAlamatSupplieir.setCellValueFactory(new PropertyValueFactory<>("alamat_supplier"));
+        colStatusSupplier.setCellValueFactory(new PropertyValueFactory<>("isAktif"));       
+    }
+    
+    void fetchKolomDatabase() throws ClassNotFoundException{
+        ObservableList<Supplier> listSupplier = FXCollections.observableArrayList();
+        listSupplier.removeAll(listSupplier);
+        try {
+            Connection con = DBHandler.getConnection();
+            ResultSet rs = con.createStatement().executeQuery("SELECT * FROM `wh`.`m_supplier`;");
+            while (rs.next()) {                
+                listSupplier.add(new Supplier(rs.getInt("id_supplier"), 
+                        rs.getString("nama_supplier"), rs.getString("alamat_supplier"),
+                        rs.getBoolean("is_aktif")));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Gagal memuat data " + e);
+        }
+        tableMasterSupplier.setItems(listSupplier);
+    }
+    
 }

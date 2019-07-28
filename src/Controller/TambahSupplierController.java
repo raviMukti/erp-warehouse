@@ -5,11 +5,16 @@
  */
 package Controller;
 
+import DAO.SupplierDAO;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,7 +35,7 @@ public class TambahSupplierController implements Initializable {
     @FXML
     private Button btnSimpanSupplier;
     @FXML
-    private ComboBox<?> comboStatusAktif;
+    private ComboBox<Boolean> comboStatusAktif;
     @FXML
     private JFXTextArea textAlamatSupplier;
     @FXML
@@ -42,6 +47,13 @@ public class TambahSupplierController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        ObservableList<Boolean> aktif = FXCollections.observableArrayList(
+                FALSE,
+                TRUE
+        );
+        
+        comboStatusAktif.setItems(aktif);
+        comboStatusAktif.setValue(TRUE);
     }    
 
 
@@ -59,7 +71,26 @@ public class TambahSupplierController implements Initializable {
     }
 
     @FXML
-    private void btnSimpanSupplierAction(ActionEvent event) {
+    private void btnSimpanSupplierAction(ActionEvent event) throws ClassNotFoundException {
+        if (fieldNamaSupplier.getText().isEmpty()||textAlamatSupplier.getText().isEmpty()
+                ||comboStatusAktif.getValue().toString().isEmpty()) {
+            //Muncul Pesan Warning
+            Alert fieldKosong = new Alert(Alert.AlertType.WARNING);
+            fieldKosong.setTitle("Perhatian");
+            fieldKosong.setHeaderText("Form Kosong");
+            fieldKosong.setContentText("Harap Mengisi Semua Field !!!");
+            fieldKosong.showAndWait();
+        } else {
+            SupplierDAO.insertSupplier(fieldNamaSupplier.getText(), textAlamatSupplier.getText());
+            // Menampilkan dialog box informasi
+            Alert alertSimpan = new Alert(Alert.AlertType.INFORMATION);
+            alertSimpan.setTitle("WareHouse App - Informasi");
+            alertSimpan.setHeaderText("Informasi Simpan Data");
+            alertSimpan.setContentText("Simpan data ke database berhasil !");
+            alertSimpan.showAndWait();
+            btnSimpanSupplier.getScene().getWindow().hide();
+        }
     }
+    
     
 }

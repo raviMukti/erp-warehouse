@@ -75,7 +75,7 @@
           <TableColumn fx:id="colIdSupplier" prefWidth="75.0" text="ID" />
           <TableColumn fx:id="colNamaSupplier" prefWidth="170.0" text="NAMA" />
             <TableColumn fx:id="colAlamatSupplieir" prefWidth="344.0" text="ALAMAT" />
-            <TableColumn fx:id="colStatusSupplier" minWidth="0.0" prefWidth="84.0" text="STATUS" />
+            <TableColumn fx:id="colStatusSupplier" minWidth="0.0" prefWidth="84.0" text="AKTIF" />
         </columns>
       </TableView>
    </center>

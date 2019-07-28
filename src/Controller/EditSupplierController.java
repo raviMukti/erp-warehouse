@@ -5,11 +5,20 @@
  */
 package Controller;
 
+import Database.DBHandler;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,8 +26,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -32,18 +40,29 @@ public class EditSupplierController implements Initializable {
     @FXML
     private Button btnSimpanSupplier;
     @FXML
-    private ComboBox<?> comboStatusAktif;
+    private ComboBox<Boolean> comboStatusAktif;
     @FXML
     private JFXTextArea textAlamatSupplier;
     @FXML
     private JFXTextField fieldNamaSupplier;
-
+    
+    Connection conn = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+    String str = FormMasterSupplierController.idSupplierGlobal;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        ObservableList<Boolean> aktif = FXCollections.observableArrayList(
+                FALSE,
+                TRUE
+        );
+        
+        comboStatusAktif.setItems(aktif);
     }    
 
 
@@ -64,4 +83,21 @@ public class EditSupplierController implements Initializable {
     private void btnSimpanSupplierAction(ActionEvent event) {
     }
     
+    public void initDataEdit(String id_supplier) throws ClassNotFoundException{
+        try {
+            Connection conn = DBHandler.getConnection();
+            ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM `wh`.`m_supplier` WHERE `id_supplier`"
+                    + "='"+id_supplier+"'");
+            while (rs.next()) {                
+                String data1 = rs.getString("nama_supplier");
+                fieldNamaSupplier.setText(data1);
+                String data2 = rs.getString("alamat_supplier");
+                textAlamatSupplier.setText(data2);
+                boolean data3 = rs.getBoolean("is_aktif");
+                comboStatusAktif.setValue(data3);
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Gagal mengambil data " + e);
+        }
+    }
 }
