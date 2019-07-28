@@ -36,7 +36,7 @@ public class SupplierDAO {
     }
     
     //method Update
-    public static void updateSupplier(String nama_supplier, String alamat_supplier, boolean isAktif, 
+    public static void updateSupplier(String nama_supplier, String alamat_supplier, int isAktif, 
             String colIdTrigger) throws ClassNotFoundException{
         String qUpdateSupplier = "UPDATE `wh`.`m_supplier` SET `nama_supplier`='"+nama_supplier+"',"
                 + "`alamat_supplier`='"+alamat_supplier+"', `is_aktif`='"+isAktif+"' "

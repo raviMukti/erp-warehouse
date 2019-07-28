@@ -89,6 +89,8 @@ public class TambahSupplierController implements Initializable {
             alertSimpan.setContentText("Simpan data ke database berhasil !");
             alertSimpan.showAndWait();
             btnSimpanSupplier.getScene().getWindow().hide();
+            FormMasterSupplierController.getInstance().fetchKolomDatabase();
+            FormMasterSupplierController.getInstance().btnHapusEditDisable();
         }
     }
     

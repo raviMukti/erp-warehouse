@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import DAO.SupplierDAO;
 import Database.DBHandler;
 import com.jfoenix.controls.JFXTextArea;
 import com.jfoenix.controls.JFXTextField;
@@ -80,7 +81,30 @@ public class EditSupplierController implements Initializable {
     }
 
     @FXML
-    private void btnSimpanSupplierAction(ActionEvent event) {
+    private void btnSimpanSupplierAction(ActionEvent event) throws ClassNotFoundException {
+        if (fieldNamaSupplier.getText().isEmpty()||textAlamatSupplier.getText().isEmpty()||comboStatusAktif.getValue()
+                .toString().isEmpty()) {
+            //Muncul Pesan Warning
+            Alert fieldKosong = new Alert(Alert.AlertType.WARNING);
+            fieldKosong.setTitle("Perhatian");
+            fieldKosong.setHeaderText("Form Kosong");
+            fieldKosong.setContentText("Harap Mengisi Semua Field !!!");
+            fieldKosong.showAndWait();
+        } else {
+            int val = comboStatusAktif.getValue() ? 1 : 0;
+            SupplierDAO.updateSupplier(fieldNamaSupplier.getText(), textAlamatSupplier.getText(), 
+                    val, str);
+            // Menampilkan dialog box informasi
+            Alert alertSimpan = new Alert(Alert.AlertType.INFORMATION);
+            alertSimpan.setTitle("WareHouse App - Informasi");
+            alertSimpan.setHeaderText("Informasi Update Data");
+            alertSimpan.setContentText("Berhasil Update Data!");
+            alertSimpan.showAndWait();
+            //Refresh FormMasterBarang
+            FormMasterSupplierController.getInstance().fetchKolomDatabase();
+            FormMasterSupplierController.getInstance().btnHapusEditDisable();
+            btnSimpanSupplier.getScene().getWindow().hide();
+        }
     }
     
     public void initDataEdit(String id_supplier) throws ClassNotFoundException{

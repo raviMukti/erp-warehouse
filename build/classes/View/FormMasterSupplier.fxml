@@ -70,7 +70,7 @@
       </Pane>
    </top>
    <center>
-      <TableView fx:id="tableMasterSupplier" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="tableMasterSupplier" onMouseClicked="#btnHapusEditAktif" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
           <TableColumn fx:id="colIdSupplier" prefWidth="75.0" text="ID" />
           <TableColumn fx:id="colNamaSupplier" prefWidth="170.0" text="NAMA" />

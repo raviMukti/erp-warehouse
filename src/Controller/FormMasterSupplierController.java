@@ -5,8 +5,8 @@
  */
 package Controller;
 
+import DAO.SupplierDAO;
 import Database.DBHandler;
-import Model.Barang;
 import Model.Supplier;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
@@ -76,6 +76,7 @@ public class FormMasterSupplierController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
         initKolom();
+        btnHapusEditDisable();
         try {
             fetchKolomDatabase();
         } catch (ClassNotFoundException ex) {
@@ -120,7 +121,20 @@ public class FormMasterSupplierController implements Initializable {
     }
 
     @FXML
-    private void btnHapusSupplierAction(ActionEvent event) {
+    private void btnHapusSupplierAction(ActionEvent event) throws ClassNotFoundException {
+        Supplier itemSupplier = tableMasterSupplier.getSelectionModel().getSelectedItem();
+        String selected = String.valueOf(itemSupplier.getId_supplier());
+        // Membuat dialog box konfirmasi
+        Alert alertBatal = new Alert(Alert.AlertType.CONFIRMATION);
+        alertBatal.setTitle("WareHouse App - Konfirmasi Hapus Data");
+        alertBatal.setHeaderText("Hapus Data??");
+        alertBatal.setContentText("Apakah anda yakin akan hapus data ini???");
+        Optional<ButtonType> konfirmasiHapus = alertBatal.showAndWait();
+        if(konfirmasiHapus.get() == ButtonType.OK){
+            SupplierDAO.deleteSupplier(selected);
+        }
+        FormMasterSupplierController.getInstance().fetchKolomDatabase();
+        btnHapusEditDisable();
     }
 
     @FXML
@@ -180,5 +194,18 @@ public class FormMasterSupplierController implements Initializable {
         }
         tableMasterSupplier.setItems(listSupplier);
     }
+    
+    //mencegah user langsung menghapus tanpa klik kolom tabel
+    public void btnHapusEditDisable(){
+        btnHapusSupplier.setDisable(true);
+        btnEditSupplier.setDisable(true);
+    }
+
+    @FXML
+    private void btnHapusEditAktif(MouseEvent event) {
+        btnEditSupplier.setDisable(false);
+        btnHapusSupplier.setDisable(false);
+    }
+    
     
 }
