@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="512.0" prefWidth="318.0" style="-fx-background-color: #deeb34;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.EditKaryawanController">
+   <bottom>
+      <HBox prefHeight="57.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+         <children>
+            <Button fx:id="btnSimpanKaryawan" mnemonicParsing="false" onAction="#btnSimpanKaryawanAction" prefHeight="62.0" prefWidth="182.0" stylesheets="@../Resources/style1.css" text="Simpan">
+               <graphic>
+                  <ImageView fitHeight="44.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Resources/icons8-checkmark-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnBatal" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#btnBatalAction" prefHeight="62.0" prefWidth="182.0" stylesheets="@../Resources/style2.css" text="Batal">
+               <graphic>
+                  <ImageView fitHeight="44.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Resources/icons8-go-back-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Button>
+         </children>
+         <BorderPane.margin>
+            <Insets top="10.0" />
+         </BorderPane.margin>
+      </HBox>
+   </bottom>
+   <center>
+      <GridPane BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="NIP">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="10.0" right="25.0" />
+               </GridPane.margin>
+            </Label>
+            <Label layoutX="10.0" layoutY="14.0" text="Nama Karyawan" GridPane.rowIndex="2">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="10.0" right="25.0" />
+               </GridPane.margin>
+            </Label>
+            <Label layoutX="10.0" layoutY="62.0" text="Jabatan Karyawan" GridPane.rowIndex="4">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="10.0" right="25.0" />
+               </GridPane.margin>
+            </Label>
+            <Label layoutX="10.0" layoutY="110.0" text="Divisi" GridPane.rowIndex="6">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="10.0" right="25.0" />
+               </GridPane.margin>
+            </Label>
+            <Label layoutX="10.0" layoutY="158.0" text="Area Kerja" GridPane.rowIndex="8">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="10.0" right="25.0" />
+               </GridPane.margin>
+            </Label>
+            <Label layoutX="10.0" layoutY="206.0" text="Mulai Masuk Kerja" GridPane.rowIndex="10">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="10.0" right="25.0" />
+               </GridPane.margin>
+            </Label>
+            <Label layoutX="10.0" layoutY="255.0" text="Akhir Bekerja" GridPane.rowIndex="12">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="10.0" right="25.0" />
+               </GridPane.margin>
+            </Label>
+            <Label layoutX="10.0" layoutY="305.0" text="Status Bekerja" GridPane.rowIndex="14">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="10.0" right="25.0" />
+               </GridPane.margin>
+            </Label>
+            <Label layoutX="10.0" layoutY="355.0" text="Foto Profil" GridPane.rowIndex="16">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="10.0" right="25.0" />
+               </GridPane.margin>
+            </Label>
+            <TextField fx:id="fieldNip" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="10.0" right="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <TextField fx:id="fieldNamaKaryawan" layoutX="10.0" layoutY="34.0" GridPane.rowIndex="3">
+               <GridPane.margin>
+                  <Insets left="10.0" right="10.0" />
+               </GridPane.margin>
+            </TextField>
+            <ComboBox fx:id="comboJabatan" prefHeight="25.0" prefWidth="332.0" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets left="10.0" right="10.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <ComboBox fx:id="comboDivisi" layoutX="10.0" layoutY="130.0" prefHeight="25.0" prefWidth="332.0" GridPane.rowIndex="7">
+               <GridPane.margin>
+                  <Insets left="10.0" right="10.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <ComboBox fx:id="comboAreaKerja" layoutX="10.0" layoutY="178.0" prefHeight="25.0" prefWidth="332.0" GridPane.rowIndex="9">
+               <GridPane.margin>
+                  <Insets left="10.0" right="10.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <ComboBox fx:id="comboStatusKerja" layoutX="10.0" layoutY="226.0" prefHeight="25.0" prefWidth="332.0" GridPane.rowIndex="15">
+               <GridPane.margin>
+                  <Insets left="10.0" right="10.0" />
+               </GridPane.margin>
+            </ComboBox>
+            <Button fx:id="btnUploadBerkas" mnemonicParsing="false" onAction="#btnUploadBerkasAction" prefHeight="25.0" prefWidth="334.0" text="Upload Berkas..." GridPane.rowIndex="17">
+               <GridPane.margin>
+                  <Insets bottom="7.0" left="10.0" right="10.0" />
+               </GridPane.margin>
+            </Button>
+            <DatePicker fx:id="masukDatePicker" prefHeight="25.0" prefWidth="320.0" GridPane.rowIndex="11">
+               <GridPane.margin>
+                  <Insets left="10.0" right="10.0" />
+               </GridPane.margin>
+            </DatePicker>
+            <DatePicker fx:id="akhirDatePicker" prefHeight="25.0" prefWidth="323.0" GridPane.rowIndex="13">
+               <GridPane.margin>
+                  <Insets left="10.0" right="10.0" />
+               </GridPane.margin>
+            </DatePicker>
+         </children>
+      </GridPane>
+   </center>
+</BorderPane>

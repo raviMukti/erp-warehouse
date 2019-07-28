@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="516.0" prefWidth="651.0" style="-fx-background-color: #deeb34;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.DashboardController">
+   <left>
+      <Accordion prefHeight="456.0" prefWidth="172.0" style="-fx-background-color: #ffffff;" BorderPane.alignment="CENTER">
+        <panes>
+          <TitledPane fx:id="titleDataMaster" alignment="CENTER" animated="false" contentDisplay="TOP" prefHeight="400.0" prefWidth="80.0" text="Data Master" textAlignment="CENTER">
+               <graphic>
+                  <ImageView fitHeight="56.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Resources/icons8-database-view-64.png" />
+                     </image></ImageView>
+               </graphic>
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button fx:id="btnMasterKaryawan" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#btnMasterKaryawanAction" prefHeight="22.0" prefWidth="150.0" stylesheets="@../Resources/style1.css" text="Karyawan">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Resources/icons8-checkmark-64.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="btnMasterSupplier" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#btnMasterSupplierAction" prefHeight="22.0" prefWidth="150.0" stylesheets="@../Resources/style1.css" text="Supplier">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Resources/icons8-checkmark-64.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="btnMasterBarang" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="20.0" layoutY="48.0" mnemonicParsing="false" onAction="#btnMasterBarangAction" prefHeight="22.0" prefWidth="150.0" stylesheets="@../Resources/style1.css" text="Barang">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Resources/icons8-checkmark-64.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+               </content>
+          </TitledPane>
+            <TitledPane fx:id="titleTransaksi" alignment="TOP_CENTER" animated="false" contentDisplay="TOP" layoutX="10.0" layoutY="10.0" prefHeight="400.0" prefWidth="80.0" text="Transaksi">
+               <graphic>
+                  <ImageView fitHeight="56.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Resources/icons8-trolley-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button fx:id="btnTransBarangMasuk" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#btnTransBarangMasukAction" prefHeight="22.0" prefWidth="150.0" stylesheets="@../Resources/style1.css" text="Barang Masuk">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Resources/icons8-checkmark-64.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="btnTransBarangKeluar" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#btnTransBarangKeluarAction" prefHeight="22.0" prefWidth="150.0" stylesheets="@../Resources/style1.css" text="Barang Keluar">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Resources/icons8-checkmark-64.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="btnCatatanMutasi" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#btnCatatanMutasiAction" prefHeight="22.0" prefWidth="150.0" stylesheets="@../Resources/style1.css" text="Catatan Mutasi">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Resources/icons8-checkmark-64.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+               </content>
+            </TitledPane>
+            <TitledPane fx:id="titleLaporan" alignment="TOP_CENTER" animated="false" contentDisplay="TOP" layoutX="10.0" layoutY="325.0" prefHeight="400.0" prefWidth="80.0" text="Laporan">
+               <graphic>
+                  <ImageView fitHeight="56.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Resources/icons8-business-report-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button fx:id="btnInfoStok" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#btnInfoStokAction" prefHeight="22.0" prefWidth="150.0" stylesheets="@../Resources/style1.css" text="Informasi Stok">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Resources/icons8-checkmark-64.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="btnLapPenerimaan" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#btnLapPenerimaanAction" prefHeight="22.0" prefWidth="150.0" stylesheets="@../Resources/style1.css" text="Lap. Penerimaan">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Resources/icons8-checkmark-64.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="btnLapPengeluaran" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#btnLapPengeluaranAction" prefHeight="22.0" prefWidth="150.0" stylesheets="@../Resources/style1.css" text="Lap. Pengeluaran">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Resources/icons8-checkmark-64.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+               </content>
+            </TitledPane>
+            <TitledPane fx:id="titleProfil" alignment="TOP_CENTER" animated="false" contentDisplay="TOP" layoutX="10.0" layoutY="325.0" prefHeight="400.0" prefWidth="80.0" text="Profil">
+               <graphic>
+                  <ImageView fx:id="fotoProfil" fitHeight="56.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Resources/icons8-customer-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button fx:id="btnGantiPassword" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#btnGantiPasswordAction" prefHeight="22.0" prefWidth="150.0" stylesheets="@../Resources/style1.css" text="Ganti Password">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Resources/icons8-checkmark-64.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </Button>
+                        <Button fx:id="btnKeluar" alignment="CENTER_RIGHT" contentDisplay="RIGHT" layoutX="20.0" layoutY="20.0" mnemonicParsing="false" onAction="#btnKeluarAction" prefHeight="22.0" prefWidth="150.0" stylesheets="@../Resources/style2.css" text="Keluar">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Resources/icons8-delete-64.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+               </content>
+            </TitledPane>
+            <TitledPane fx:id="titlePengaturan" alignment="TOP_CENTER" animated="false" contentDisplay="TOP" layoutX="10.0" layoutY="180.0" prefHeight="400.0" prefWidth="80.0" text="Pengaturan">
+               <graphic>
+                  <ImageView fitHeight="56.0" fitWidth="74.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Resources/icons8-settings-64.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <content>
+                  <VBox prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                        <Button fx:id="btnSettingHakAkses" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#btnSettingHakAksesAction" prefHeight="22.0" prefWidth="150.0" stylesheets="@../Resources/style1.css" text="Hak Akses">
+                           <graphic>
+                              <ImageView fitHeight="20.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../Resources/icons8-checkmark-64.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets bottom="3.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+               </content>
+            </TitledPane>
+        </panes>
+      </Accordion>
+   </left>
+   <bottom>
+      <HBox prefHeight="45.0" prefWidth="651.0" style="-fx-background-color: #3d3c3c;" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="labelTanggal" alignment="CENTER" contentDisplay="CENTER" prefHeight="52.0" prefWidth="171.0" text="Tanggal" textAlignment="CENTER" textFill="WHITE" />
+            <Label fx:id="labelNamaUser" alignment="CENTER" contentDisplay="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="52.0" prefWidth="171.0" text="User" textAlignment="CENTER" textFill="WHITE" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="181.0" layoutY="10.0" prefHeight="52.0" prefWidth="171.0" text=" " textAlignment="CENTER" textFill="WHITE" />
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="352.0" layoutY="10.0" prefHeight="52.0" prefWidth="171.0" text=" " textAlignment="CENTER" textFill="WHITE" />
+         </children>
+      </HBox>
+   </bottom>
+   <center>
+      <LineChart fx:id="lineChart" prefHeight="434.0" prefWidth="436.0" title="Stok Barang WareHouse" BorderPane.alignment="CENTER">
+        <xAxis>
+          <CategoryAxis fx:id="bulanPenjualan" label="Bulan" side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis fx:id="jumlahPenjualan" label="Jumlah" side="LEFT" />
+        </yAxis>
+      </LineChart>
+   </center>
+</BorderPane>
