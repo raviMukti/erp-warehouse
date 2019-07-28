@@ -5,12 +5,14 @@
  */
 package Controller;
 
+import DAO.BarangDAO;
 import Database.DBHandler;
 import Model.Barang;
 import com.jfoenix.controls.JFXTextField;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -37,6 +39,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javax.swing.JOptionPane;
 
 /**
  * FXML Controller class
@@ -73,13 +76,20 @@ public class FormMasterBarangController implements Initializable {
     private TableColumn<Barang, String> colStokBarang;
     @FXML
     private TableColumn<Barang, String> colMasukBarang;
-
+    
+    Connection conn = null;
+    PreparedStatement ps = null;
+    ResultSet rs = null;
+    @FXML
+    private ImageView delCari;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        btnHapusEditDisable();
         initKolom();
         try {
             fetchKolomDatabase();
@@ -99,13 +109,35 @@ public class FormMasterBarangController implements Initializable {
         return instance;
     }
     
-
+    public static String idBarangGlobal;
+    
+    
     @FXML
-    private void fieldCariAction(ActionEvent event) {
+    private void fieldCariAction(ActionEvent event) throws ClassNotFoundException {
+        ObservableList<Barang> listBarangCari = FXCollections.observableArrayList();
+        listBarangCari.removeAll(listBarangCari);
+        
+        String itemCari = fieldCari.getText();
+        String qCari = "SELECT * FROM `wh`.`m_barang` WHERE `merk_barang` LIKE  '%"+itemCari+"';";
+        try {
+            conn = DBHandler.getConnection();
+            ps  = conn.prepareStatement(qCari);
+            rs = ps.executeQuery();
+            while (rs.next()) {                
+                listBarangCari.add(new Barang(rs.getInt("id_barang"), 
+                        rs.getString("nama_barang"), rs.getString("merk_barang"),
+                        rs.getString("tipe_barang"), rs.getString("satuan_barang"), rs.getDouble("stok_barang"),
+                        rs.getDate("masuk_gudang").toLocalDate()));
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Gagal Memuat data" + e);
+        }
+        tableMasterBarang.setItems(listBarangCari);
     }
 
     @FXML
     private void btnCariAction(MouseEvent event) {
+        
     }
 
 
@@ -141,14 +173,30 @@ public class FormMasterBarangController implements Initializable {
     }
 
     @FXML
-    private void btnHapusBarangAction(ActionEvent event) {
+    private void btnHapusBarangAction(ActionEvent event) throws ClassNotFoundException {
+        Barang itemBarang = tableMasterBarang.getSelectionModel().getSelectedItem();
+        String selected = String.valueOf(itemBarang.getId_barang());
+        // Membuat dialog box konfirmasi
+        Alert alertBatal = new Alert(Alert.AlertType.CONFIRMATION);
+        alertBatal.setTitle("WareHouse App - Konfirmasi Hapus Data");
+        alertBatal.setHeaderText("Hapus Data??");
+        alertBatal.setContentText("Apakah anda yakin akan hapus data ini???");
+        Optional<ButtonType> konfirmasiHapus = alertBatal.showAndWait();
+        if(konfirmasiHapus.get() == ButtonType.OK){
+            BarangDAO.deleteBarang(selected);
+        }
+        btnHapusEditDisable();
+        FormMasterBarangController.getInstance().fetchKolomDatabase();
     }
 
     @FXML
-    private void btnEditBarangAction(ActionEvent event) throws IOException {
+    private void btnEditBarangAction(ActionEvent event) throws IOException, SQLException, ClassNotFoundException {
+        idBarangGlobal = String.valueOf(tableMasterBarang.getSelectionModel().getSelectedItem().getId_barang());
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/View/EditBarang.fxml"));
         Parent root = (Parent) loader.load();
+        EditBarangController ctrl = loader.getController();
+        ctrl.initDataEdit(idBarangGlobal);
         Stage stage = new Stage();
         Scene scene = new Scene(root);
         stage.initModality(Modality.APPLICATION_MODAL);
@@ -186,21 +234,25 @@ public class FormMasterBarangController implements Initializable {
                         rs.getDate("masuk_gudang").toLocalDate()));
             }
         } catch (SQLException e) {
-            System.out.println("Gagal memuat data " + e);
+            JOptionPane.showMessageDialog(null, "Gagal memuat data " + e);
         }
         tableMasterBarang.setItems(listBarang);
-    }
-
-    @FXML
-    private void btnHapusAktif(MouseEvent event) {
-        btnHapusBarang.setDisable(false);
-        btnEditBarang.setDisable(false);
     }
     
     //mencegah user langsung menghapus tanpa klik kolom tabel
     public void btnHapusEditDisable(){
         btnHapusBarang.setDisable(true);
         btnEditBarang.setDisable(true);
+    }
+
+    @FXML
+    private void btnHapusEditAktif(MouseEvent event) {
+        btnHapusBarang.setDisable(false);
+        btnEditBarang.setDisable(false);
+    }
+
+    @FXML
+    private void hapusCariDanRefresh(MouseEvent event) {
     }
 }
 
